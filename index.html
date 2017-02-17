@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Caesar Cipher</title>
+  <style tyle="text/css">
+    body {
+      font-family: Helvetica;
+      background-color: #CDCAB9;
+    }
+    .container {
+      display: flex;
+      justify-content: center;
+      margin: 150px 40px;
+    }
+    .left {
+      align-self: center;
+      display: inline-block;
+      float: left;
+      width: 40%;
+      padding: 50px;
+    }
+    .right {
+      align-self: center;
+      display: inline-block;
+      float: right;
+      width: 60%;
+      padding: 50px;
+    }
+    h1 {
+      color: #432F21;
+    }
+    .create {
+      font-size: 2em;
+    }
+    .secret {
+      font-size: 1.5em;
+    }
+    .using {
+      font-size: 1em;
+    }
+    .cipher {
+      font-size: 2em;
+      color: #CA171B;
+    }
+    textarea {
+      font-size: 1em;
+      width: 50%;
+      height: 110px;
+      border: solid #432F21 3px;
+      border-radius: 10px;
+      padding: 3px;
+    }
+    button {
+      font-size: 1em;
+      margin: 5px
+    }
+    .result {
+      font-size: 1em;
+      background-color: #DFDED4;
+      border: solid #432F21 3px;
+      border-radius: 10px;
+      width: 50%;
+      height: 110px;
+      padding: 5px;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="left">
+      <h1>
+        <span class="create">Create</span><br />
+        <span class="secret">secret messages</span><br />
+        <span class="using">using</span><br />
+        <span class="cipher">Caesar cipher</span>
+      </h1>
+    </div>
+    <div class="right">
+      <textarea id="text" placeholder="Type your text here."></textarea><br />
+      <button type="button" id="btn">Cipher</button>
+      <div id="secretMessage" class="result">Your encrypted message will display here.</div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("btn").addEventListener("click", function() {buttonClick()});
+
+    function buttonClick() {
+      var myText = document.getElementById("text").value;
+      document.getElementById("secretMessage").innerHTML = rot13(myText);
+    }
+
+    function rot13(str) { // LBH QVQ VG!
+      var charCodeArr = [];
+      for (var i = 0; i < str.length; i++) {
+        if ((str.charCodeAt(i) >= 65 && str.charCodeAt(i) <= 77) || (str.charCodeAt(i) >= 97 && str.charCodeAt(i) <= 109)) {
+          charCodeArr.push(str.charCodeAt(i) + 13);
+        } else if ((str.charCodeAt(i) >= 78 && str.charCodeAt(i) <= 90) || (str.charCodeAt(i) >= 110 && str.charCodeAt(i) <= 122)) {
+          charCodeArr.push(str.charCodeAt(i) - 13);
+        } else {
+          charCodeArr.push(str.charCodeAt(i));
+        }
+      }
+
+      var strArr = [];
+      for (var j = 0; j < charCodeArr.length; j++) {
+        strArr.push(String.fromCharCode(charCodeArr[j]));
+      }
+      return strArr.join('');
+    }
+
+  </script>
+</body>
+</html>
